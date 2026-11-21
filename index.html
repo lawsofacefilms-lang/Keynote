@@ -89,6 +89,15 @@
   .flag{align-self:flex-start;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:var(--red);padding:4px 9px;border-radius:2px;margin-bottom:14px}
   .btn{appearance:none;border:1px solid var(--red-soft);background:transparent;color:#fff;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:14px 16px;border-radius:4px;cursor:pointer;text-align:center;text-decoration:none;display:inline-block}
   .btn:hover,.path.pick .btn{background:var(--red);border-color:var(--red);color:#fff}
+.addon{margin-top:clamp(22px,3vw,30px);max-width:900px;display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;border:1px dashed rgba(255,255,255,.28);border-radius:8px;padding:22px 26px;cursor:pointer}
+  .addon input{appearance:none;width:24px;height:24px;border:2px solid #fff;border-radius:4px;margin:0;display:grid;place-content:center;cursor:pointer}
+  .addon input::after{content:"";width:12px;height:12px;background:var(--red-soft);border-radius:1px;transform:scale(0);transition:transform .12s}
+  .addon input:checked{border-color:var(--red-soft)}
+  .addon input:checked::after{transform:scale(1)}
+  .addon b{display:block;font-family:var(--display);font-size:24px;text-transform:uppercase;font-weight:800;line-height:1.1}
+  .addon span.d{display:block;font-size:15px;color:#C9CACD;margin-top:4px}
+  .addon .r{font-family:var(--mono);font-size:24px;color:#fff;white-space:nowrap}
+  @media (max-width:560px){.addon{grid-template-columns:auto 1fr}.addon .r{grid-column:2}}
   .fine{margin-top:26px;font-size:14.5px;color:#A9AAAE;max-width:70ch}
 
   /* proof */
@@ -235,6 +244,11 @@
       </div>
 
     </div>
+    <label class="addon" for="vert">
+      <input type="checkbox" id="vert">
+      <span><b>Add-on: Two Vertical Clips</b><span class="d">Two short vertical (9:16) clips cut from your keynote, up to 90 seconds each, ready for Instagram, TikTok, and Reels. Available with either option. Tick the box, then choose your option above.</span></span>
+      <span class="r">+$350</span>
+    </label>
     <p class="fine">A 50% deposit reserves December 4. The balance is due before the event.</p>
   </div>
 </section>
@@ -357,12 +371,20 @@
     });
     [].slice.call(track.children).forEach(function(n){var c=n.cloneNode(true);c.setAttribute('aria-hidden','true');track.appendChild(c)});
   }
+  function money(n){return '$'+n.toLocaleString('en-US')}
+  var v=document.getElementById('vert');
   function mail(opt,label,price){
-    var body='Hi Bryan,\n\nI would like to go with '+opt+': '+label+' ('+price+') for the Becoming Awesome keynote at The Westin Nashville on Friday, December 4.\n\nThanks,\nCam';
-    return 'mailto:lawsofacefilms@gmail.com?subject='+encodeURIComponent('Dec 4 keynote video: '+opt)+'&body='+encodeURIComponent(body);
+    var add=v.checked;
+    var total=price+(add?350:0);
+    var body='Hi Bryan,\n\nI would like to go with '+opt+': '+label+' ('+money(price)+')'+(add?', plus the two vertical clips add-on ($350), for a total of '+money(total):'')+', for the Becoming Awesome keynote at The Westin Nashville on Friday, December 4.\n\nThanks,\nCam';
+    return 'mailto:lawsofacefilms@gmail.com?subject='+encodeURIComponent('Dec 4 keynote video: '+opt+(add?' + verticals':''))+'&body='+encodeURIComponent(body);
   }
-  document.getElementById('pick1').href=mail('Option 1','Film + Highlight Recap','$1,500');
-  document.getElementById('pick2').href=mail('Option 2','Film Only, Raw Footage','$850');
+  function set(){
+    document.getElementById('pick1').href=mail('Option 1','Film + Highlight Recap',1500);
+    document.getElementById('pick2').href=mail('Option 2','Film Only, Raw Footage',850);
+  }
+  v.addEventListener('change',set);
+  set();
 })();
 </script>
 </body>
