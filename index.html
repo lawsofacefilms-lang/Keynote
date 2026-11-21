@@ -101,6 +101,9 @@
   .fine{margin-top:26px;font-size:14.5px;color:#A9AAAE;max-width:70ch}
 
   /* proof */
+  .pair{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,1fr);gap:clamp(20px,3vw,30px);align-items:start;margin-bottom:clamp(20px,3vw,30px)}
+  .frame.v{aspect-ratio:9/16}
+  @media (max-width:760px){.pair{grid-template-columns:1fr}.pair .card.vert{max-width:360px}}
   .proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(20px,3vw,30px)}
   .card{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--card)}
   .frame{aspect-ratio:16/9;background:#0E0E0F}
@@ -261,10 +264,16 @@
       <h2>Speakers, events, and the people in the room</h2>
       <p class="lede" style="margin-top:18px">Start with Unreasonable Generosity, a speaker event filmed this month and delivered as a recap and verticals, the same thing Option 1 and the vertical add-on give you. More event and speaker work follows.</p>
     </div>
-    <article class="card" style="margin-bottom:clamp(20px,3vw,30px)">
+    <div class="pair">
+    <article class="card">
       <div class="frame"><iframe src="https://galleries.vidflow.co/videos/m88sntm2" title="Unreasonable Generosity Recap" allowfullscreen loading="lazy"></iframe></div>
       <div class="body"><h3>Unreasonable Generosity: Recap + Verticals</h3><p>Proof of concept: a speaker event for the Community Foundation of Middle Tennessee, filmed this month and delivered as a highlight recap plus vertical clips. The same package you are choosing from here.</p></div>
     </article>
+    <article class="card vert">
+      <div class="frame v"><iframe src="https://galleries.vidflow.co/videos/yldw0aym" title="Vertical: Be Unreasonable" allowfullscreen loading="lazy"></iframe></div>
+      <div class="body"><h3>Vertical: Be Unreasonable</h3><p>A vertical sample from the CFMT case study, cut for Instagram, TikTok, and Reels. This is what the vertical add-on delivers.</p></div>
+    </article>
+    </div>
     <div class="proof">
       <article class="card">
         <div class="frame"><iframe src="https://galleries.vidflow.co/videos/j888whc3" title="Pinnacle Financial Partners Small Business Summit" allowfullscreen loading="lazy"></iframe></div>
